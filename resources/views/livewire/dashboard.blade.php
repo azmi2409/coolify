@@ -72,7 +72,7 @@
                                 class="absolute inset-0 rounded-xl"
                                 aria-label="Open {{ $project->name }}"></a>
 
-                            <div class="flex min-w-0 items-start gap-3">
+                            <div class="flex min-w-0 {{ $project->description ? 'items-start' : 'items-center' }} gap-3">
                                 <div
                                     class="flex size-8 shrink-0 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-fg-dim">
                                     @if ($project->icon_path)
@@ -88,9 +88,11 @@
                                         class="truncate text-[13px]! leading-4! font-semibold! text-black dark:text-fg">
                                         {{ $project->name }}
                                     </h3>
-                                    <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint">
-                                        {{ $project->description }}
-                                    </p>
+                                    @if ($project->description)
+                                        <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint">
+                                            {{ $project->description }}
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
 
@@ -199,7 +201,7 @@
                                     :key="'dashboard-server-metrics-'.$server->uuid" />
                             @endif
 
-                            <div class="relative z-10 flex min-w-0 items-start gap-3">
+                            <div class="relative z-10 flex min-w-0 {{ $server->description ? 'items-start' : 'items-center' }} gap-3">
                                 <div
                                     class="flex size-8 shrink-0 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-500 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-fg-dim">
                                     <x-reicon name="servers" class="size-4" />
@@ -209,9 +211,11 @@
                                         class="truncate text-[13px]! leading-4! font-semibold! text-black dark:text-fg">
                                         {{ $server->name }}
                                     </h3>
-                                    <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint">
-                                        {{ $server->description }}
-                                    </p>
+                                    @if ($server->description)
+                                        <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint">
+                                            {{ $server->description }}
+                                        </p>
+                                    @endif
                                 </div>
                                 @if ($serverStatusType !== 'success')
                                     <span data-tooltip="{{ $serverStatus }}"

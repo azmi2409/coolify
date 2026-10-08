@@ -106,7 +106,7 @@
                             class="group relative flex min-h-28 flex-col rounded-xl border border-neutral-200 bg-white p-3 shadow-sm transition-all hover:-translate-y-px hover:border-neutral-300 hover:shadow-md dark:border-white/[0.08] dark:bg-white/[0.05] dark:hover:border-white/[0.14]">
                             <a :href="project.href" {{ wireNavigate() }} class="absolute inset-0 rounded-xl"
                                 :aria-label="`Open ${project.name}`"></a>
-                            <div class="flex items-start gap-3">
+                            <div class="flex gap-3" :class="project.description ? 'items-start' : 'items-center'">
                                 <div
                                     class="flex size-8 shrink-0 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-500 dark:border-white/[0.08] dark:bg-white/[0.04] dark:text-fg-dim">
                                     <template x-if="project.iconUrl">
@@ -120,8 +120,10 @@
                                     <h2
                                         class="truncate text-[13px]! leading-4! font-semibold! text-black dark:text-fg"
                                         x-text="project.name"></h2>
-                                    <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint"
-                                        x-text="project.description || ''"></p>
+                                    <template x-if="project.description">
+                                        <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint"
+                                            x-text="project.description"></p>
+                                    </template>
                                 </div>
                             </div>
 

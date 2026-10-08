@@ -63,7 +63,7 @@
                 @forelse ($privateKeys as $privateKey)
                     <div
                         class="flex flex-col gap-4 border-b border-neutral-200 px-4 py-4 last:border-b-0 sm:flex-row sm:items-center sm:justify-between dark:border-white/[0.08]">
-                        <div class="flex min-w-0 items-start gap-3">
+                        <div class="flex min-w-0 {{ $privateKey->description ? 'items-start' : 'items-center' }} gap-3">
                             <div
                                 class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-neutral-100 text-neutral-500 dark:bg-white/[0.06] dark:text-fg-dim">
                                 <x-reicon name="keys" class="size-4" />
@@ -77,9 +77,11 @@
                                         <x-status-badge status="Active" type="success" />
                                     @endif
                                 </div>
-                                <p class="mt-1 text-xs text-neutral-500 dark:text-fg-dim">
-                                    {{ $privateKey->description }}
-                                </p>
+                                @if ($privateKey->description)
+                                    <p class="mt-1 text-xs text-neutral-500 dark:text-fg-dim">
+                                        {{ $privateKey->description }}
+                                    </p>
+                                @endif
                             </div>
                         </div>
                         <div class="flex shrink-0 items-center gap-2">

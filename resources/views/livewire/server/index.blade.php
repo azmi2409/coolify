@@ -142,7 +142,7 @@
                                 :key="'server-index-metrics-'.$server->uuid" />
                         @endif
 
-                        <div class="relative z-10 flex items-start gap-3">
+                        <div class="relative z-10 flex {{ $serverRow['description'] ? 'items-start' : 'items-center' }} gap-3">
                             <div
                                 class="flex size-8 shrink-0 items-center justify-center rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-500 dark:border-white/[0.1] dark:bg-white/[0.04] dark:text-fg-dim">
                                 <x-reicon name="servers" class="size-4" />
@@ -151,9 +151,11 @@
                                 <h2 class="truncate text-[13px]! leading-4! font-semibold! text-black dark:text-fg">
                                     {{ $serverRow['name'] }}
                                 </h2>
-                                <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint">
-                                    {{ $serverRow['description'] }}
-                                </p>
+                                @if ($serverRow['description'])
+                                    <p class="mt-0.5 truncate text-[11px] text-neutral-500 dark:text-fg-faint">
+                                        {{ $serverRow['description'] }}
+                                    </p>
+                                @endif
                             </div>
                             @if ($serverRow['statusType'] !== 'success')
                                 <span data-tooltip="{{ $serverRow['status'] }}"
@@ -190,8 +192,10 @@
                             <div class="min-w-0">
                                 <p class="truncate text-[13px] font-semibold text-black dark:text-fg"
                                     x-text="server.name"></p>
-                                <p class="truncate text-[11px] text-neutral-500 dark:text-fg-faint"
-                                    x-text="server.description"></p>
+                                <template x-if="server.description">
+                                    <p class="truncate text-[11px] text-neutral-500 dark:text-fg-faint"
+                                        x-text="server.description"></p>
+                                </template>
                             </div>
                             <span x-show="server.statusType !== 'success'" :data-tooltip="server.status"
                                 :aria-label="`Server status: ${server.status}`"
